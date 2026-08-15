@@ -1,0 +1,23 @@
+{
+  "name": "chill-vibe",
+  "version": "1.0.0",
+  "description": "Nostalgic Indian Barbershop Web Radio Player",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node scripts/start-dev.js",
+    "deploy": "partykit deploy",
+    "fetch-playlist": "node scripts/fetch-playlist.js"
+  },
+  "keywords": [
+    "partykit",
+    "youtube-iframe-api",
+    "synchronized-radio",
+    "retro-indian-barbershop"
+  ],
+  "author": "Antigravity Pair Programmer",
+  "license": "MIT",
+  "devDependencies": {
+    "partykit": "^0.0.112",
+    "typescript": "^5.1.6"
+  }
+}

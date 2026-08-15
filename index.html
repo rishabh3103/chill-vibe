@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHILL VIBE — Retro Indian Barbershop Radio</title>
+    
+    <!-- SEO and Meta Tags -->
+    <meta name="description" content="A nostalgic, synchronized web radio player set in a cozy retro Indian barbershop. Tune in with others to romantic Bollywood classics and chill soft songs.">
+    <meta name="keywords" content="chill vibe, web radio, synchronized, bollywood lofi, romantic songs, retro indian cafe, barbershop radio, partykit">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chillvibe.pages.dev/">
+    <meta property="og:title" content="CHILL VIBE — Retro Indian Barbershop Radio">
+    <meta property="og:description" content="Tune in to a nostalgic web radio player set in a cozy Indian barbershop. Synchronized with listeners worldwide.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1200&auto=format&fit=crop"> <!-- Premium Unsplash Barber Shop Image for Preview -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://chillvibe.pages.dev/">
+    <meta property="twitter:title" content="CHILL VIBE — Retro Indian Barbershop Radio">
+    <meta property="twitter:description" content="Tune in to a nostalgic web radio player set in a cozy Indian barbershop. Synchronized with listeners worldwide.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1200&auto=format&fit=crop">
+
+    <!-- Monospace & Retro Serif Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Favicon (Retro Radio Emoji) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>📻</text></svg>">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- VISUALLY HIDDEN YOUTUBE PLAYER CONTAINER -->
+    <div id="youtube-player"></div>
+
+    <!-- DUST MOTES (Background Particle Effect) -->
+    <div class="dust-container">
+        <div class="dust-mote" style="width: 4px; height: 4px; top: 15%; left: 20%; animation-delay: 0s;"></div>
+        <div class="dust-mote" style="width: 6px; height: 6px; top: 40%; left: 15%; animation-delay: 2s;"></div>
+        <div class="dust-mote" style="width: 3px; height: 3px; top: 70%; left: 25%; animation-delay: 4s;"></div>
+        <div class="dust-mote" style="width: 5px; height: 5px; top: 30%; left: 70%; animation-delay: 1s;"></div>
+        <div class="dust-mote" style="width: 4px; height: 4px; top: 60%; left: 80%; animation-delay: 3s;"></div>
+        <div class="dust-mote" style="width: 7px; height: 7px; top: 80%; left: 65%; animation-delay: 5s;"></div>
+    </div>
+
+    <!-- SCENE CONTAINER (FULL VIEWPORT ILLUSTRATED VECTOR SCENE) -->
+    <div class="scene-container">
+        <svg class="scene-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <!-- Mirror Gradient -->
+                <linearGradient id="mirror-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#bfdbfe" stop-opacity="0.8"/>
+                    <stop offset="60%" stop-color="#93c5fd" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.4"/>
+                </linearGradient>
+                <!-- Wall Shadow -->
+                <radialGradient id="wall-glow" cx="50%" cy="40%" r="60%">
+                    <stop offset="0%" stop-color="#FFF6EE" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="#12181B" stop-opacity="0.1"/>
+                </radialGradient>
+                <!-- Mirror Border Gradient -->
+                <linearGradient id="wood-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#6e473b"/>
+                    <stop offset="50%" stop-color="#4d2f26"/>
+                    <stop offset="100%" stop-color="#2d1711"/>
+                </linearGradient>
+                <!-- Radio Speaker Grill Pattern -->
+                <pattern id="grill-pattern" width="6" height="6" patternUnits="userSpaceOnUse">
+                    <circle cx="3" cy="3" r="1.5" fill="#302018" opacity="0.4"/>
+                </pattern>
+            </defs>
+
+            <!-- WALL BACKGROUND -->
+            <rect width="800" height="400" fill="#EADCC9"/> <!-- Warm Vintage Cream Upper Wall -->
+            <rect width="800" height="400" fill="url(#wall-glow)"/> <!-- Soft Ambient Glow -->
+            
+            <!-- WAINSCOTING (Lower wall paneling) -->
+            <rect y="400" width="800" height="200" fill="#4B6F6D"/> <!-- Vintage Teal Lower Wall -->
+            <rect y="400" width="800" height="8" fill="#3A5351"/> <!-- Darker panel edge border -->
+            <rect y="408" width="800" height="12" fill="#8C5C4A"/> <!-- Wooden Chair rail/Trim divider -->
+
+            <!-- VERTICAL BEADS FOR PANEL DETAIL -->
+            <path d="M50 408 v192 M150 408 v192 M250 408 v192 M350 408 v192 M450 408 v192 M550 408 v192 M650 408 v192 M750 408 v192" 
+                  stroke="#3F5B5A" stroke-width="2" opacity="0.6"/>
+
+            <!-- FLOOR TILES (Checkered Perspective Grid at the bottom) -->
+            <polygon points="0,550 800,550 800,600 0,600" fill="#36221B"/> <!-- Floor wood base -->
+            <path d="M0 550 h800 M0 575 h800 M0 600 h800" stroke="#251611" stroke-width="2"/>
+
+            <!-- ARCHED WINDOW -->
+            <g id="window" transform="translate(40, 100)">
+                <!-- Sky -->
+                <path d="M0 60 A40 40 0 0 1 80 60 V220 H0 Z" fill="#0A1128" />
+                <!-- Crescent Moon -->
+                <path d="M55 85 A12 12 0 1 0 63 97 A15 15 0 1 1 55 85 Z" fill="#FFEAA7"/>
+                <!-- Stars -->
+                <circle cx="25" cy="80" r="1.5" fill="#ffffff" opacity="0.8"/>
+                <circle cx="45" cy="110" r="1" fill="#ffffff" opacity="0.5"/>
+                <circle cx="20" cy="140" r="1.5" fill="#ffffff" opacity="0.9"/>
+                <!-- Window frame -->
+                <path d="M0 60 A40 40 0 0 1 80 60 V220 H0 Z" fill="none" stroke="#5D3A2C" stroke-width="8"/>
+                <!-- Window Panes -->
+                <line x1="40" y1="20" x2="40" y2="220" stroke="#5D3A2C" stroke-width="4"/>
+                <line x1="0" y1="120" x2="80" y2="120" stroke="#5D3A2C" stroke-width="4"/>
+                <!-- Light Spill cast onto floor -->
+                <polygon points="-40,220 120,220 220,380 -120,380" fill="#FFEAA7" opacity="0.08"/>
+            </g>
+
+            <!-- ROUND MIRROR -->
+            <g id="mirror">
+                <!-- Wooden frame -->
+                <circle cx="400" cy="200" r="125" fill="none" stroke="url(#wood-grad)" stroke-width="12"/>
+                <circle cx="400" cy="200" r="119" fill="none" stroke="#20110C" stroke-width="2"/>
+                <!-- Glass Mirror -->
+                <circle cx="400" cy="200" r="118" fill="url(#mirror-grad)"/>
+                <!-- Diagonal light reflections on mirror -->
+                <path d="M305 130 L480 305" stroke="#FFFFFF" stroke-width="14" opacity="0.12" stroke-linecap="round"/>
+                <path d="M340 110 L445 215" stroke="#FFFFFF" stroke-width="6" opacity="0.12" stroke-linecap="round"/>
+                <!-- Soft reflection of back wall items (Ceiling Fan) -->
+                <path d="M370 110 L430 110" stroke="#2D4645" stroke-width="3" opacity="0.4"/>
+                <path d="M360 120 L440 120" stroke="#2D4645" stroke-width="1" opacity="0.3"/>
+            </g>
+
+            <!-- VINTAGE CALENDAR -->
+            <g id="calendar" transform="translate(170, 110)">
+                <!-- String and Nail -->
+                <line x1="45" y1="0" x2="20" y2="25" stroke="#4A3427" stroke-width="2"/>
+                <line x1="45" y1="0" x2="70" y2="25" stroke="#4A3427" stroke-width="2"/>
+                <circle cx="45" cy="0" r="3" fill="#6B7280"/>
+                
+                <!-- Calendar Backboard -->
+                <rect x="10" y="25" width="70" height="95" rx="2" fill="#E6D3B8" stroke="#4E3629" stroke-width="2"/>
+                <rect x="14" y="29" width="62" height="42" fill="#F4EDE1"/>
+                
+                <!-- Stylized Retro Bollywood Actress Vector Portrait -->
+                <!-- Hair -->
+                <path d="M45 32 C35 32 30 40 30 52 C30 65 38 68 45 68 C52 68 60 65 60 52 C60 40 55 32 45 32 Z" fill="#1C1917" />
+                <!-- Face -->
+                <path d="M45 37 C39 37 36 43 36 49 C36 57 41 61 45 61 C49 61 54 57 54 49 C54 43 51 37 45 37 Z" fill="#FCE8D5" />
+                <path d="M34 46 C32 50 32 58 35 62" fill="none" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/> <!-- Hair curl left -->
+                <path d="M56 46 C58 50 58 58 55 62" fill="none" stroke="#1C1917" stroke-width="3" stroke-linecap="round"/> <!-- Hair curl right -->
+                <circle cx="45" cy="41" r="2" fill="#BA322E"/> <!-- Bindi -->
+                <!-- Saree draping -->
+                <path d="M30 66 L60 66 L60 70 L30 70 Z" fill="#BA322E" />
+                <path d="M30 66 L48 57 L54 62 L60 66" fill="#D97706" opacity="0.8"/> <!-- Saree gold border -->
+
+                <!-- Calendar month text -->
+                <text x="45" y="85" font-family="'DM Serif Display', serif" font-size="12" font-weight="bold" fill="#B91C1C" text-anchor="middle">AUG 1985</text>
+                
+                <!-- Dates Grid Lines (minimal representation) -->
+                <line x1="20" y1="95" x2="70" y2="95" stroke="#78350F" stroke-width="1.5" stroke-dasharray="2, 3"/>
+                <line x1="20" y1="102" x2="70" y2="102" stroke="#78350F" stroke-width="1.5" stroke-dasharray="2, 3"/>
+                <line x1="20" y1="109" x2="70" y2="109" stroke="#78350F" stroke-width="1.5" stroke-dasharray="2, 3"/>
+                
+                <!-- Tear effect at bottom -->
+                <path d="M10 120 L20 118 L30 120 L40 118 L50 120 L60 118 L70 120 L80 118 V117 H10 Z" fill="#4E3629"/>
+            </g>
+
+            <!-- WOODEN RADIO SHELF -->
+            <g id="shelf" transform="translate(530, 310)">
+                <!-- Support brackets -->
+                <polygon points="20,10 35,10 20,40" fill="#4A3026" />
+                <polygon points="150,10 165,10 150,40" fill="#4A3026" />
+                <!-- Shelf Board -->
+                <rect x="0" y="0" width="190" height="12" rx="2" fill="#8C5C4A" stroke="#3A231C" stroke-width="2"/>
+            </g>
+
+            <!-- TRANSISTOR RADIO -->
+            <g id="radio" transform="translate(545, 222)">
+                <!-- Antenna (Retracted/Extended) -->
+                <line x1="150" y1="35" x2="70" y2="-15" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="70" cy="-15" r="3" fill="#D1D5DB"/>
+                
+                <!-- Radio Body -->
+                <rect x="10" y="35" width="140" height="60" rx="6" fill="#A75A32" stroke="#4C2512" stroke-width="3"/>
+                <rect x="14" y="39" width="132" height="52" rx="4" fill="#69371D"/>
+                
+                <!-- Tuner Display Area -->
+                <rect x="20" y="44" width="75" height="18" rx="2" fill="#EAE5D9" stroke="#31170A" stroke-width="2"/>
+                <!-- Radio Dial lines -->
+                <line x1="25" y1="53" x2="90" y2="53" stroke="#9A3412" stroke-width="1.5"/>
+                <!-- TUNER DIAL RED INDICATOR (Drifts slightly, glowing in styling) -->
+                <line class="radio-dial-glow" x1="60" y1="46" x2="60" y2="60" stroke="#FF0000" stroke-width="2"/>
+                
+                <!-- Volume & Tuning Knobs -->
+                <circle cx="112" cy="53" r="7" fill="#1F2937"/>
+                <circle cx="112" cy="53" r="5" fill="#9CA3AF"/>
+                <circle cx="132" cy="53" r="7" fill="#1F2937"/>
+                <circle cx="132" cy="53" r="5" fill="#9CA3AF"/>
+                
+                <!-- Speaker Grill -->
+                <rect x="20" y="67" width="120" height="20" rx="2" fill="url(#grill-pattern)" stroke="#31170A" stroke-width="1.5"/>
+                
+                <!-- Handle -->
+                <path d="M25 35 V28 H135 V35" fill="none" stroke="#2D150B" stroke-width="5" stroke-linecap="round"/>
+                <path d="M25 35 V28 H135 V35" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- MUSIC NOTES (Floating up from the radio, animated in CSS) -->
+                <g id="music-notes">
+                    <!-- Note 1 -->
+                    <path class="music-note music-note-1" d="M10 -5 A4 4 0 1 1 6 -9 V-25 H14 V-18 H6" fill="none" stroke="#FFA726" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Note 2 -->
+                    <path class="music-note music-note-2" d="M-10 -30 A3 3 0 1 1 -13 -33 V-45 H-7 V-40 H-13" fill="none" stroke="#FFCC80" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- Note 3 -->
+                    <path class="music-note music-note-3" d="M30 -22 A3.5 3.5 0 1 1 26.5 -25.5 V-39 H33 V-34 H26.5" fill="none" stroke="#FF7043" stroke-width="1.8" stroke-linecap="round"/>
+                </g>
+            </g>
+
+            <!-- TEA STOOL WITH CUTTING CHAI -->
+            <g id="tea-stool" transform="translate(140, 410)">
+                <!-- Stool Shadow -->
+                <ellipse cx="45" cy="115" rx="40" ry="10" fill="#20110C" opacity="0.4"/>
+                
+                <!-- Stool Legs -->
+                <line x1="20" y1="50" x2="10" y2="115" stroke="#3A231A" stroke-width="6" stroke-linecap="round"/>
+                <line x1="45" y1="50" x2="45" y2="110" stroke="#3A231A" stroke-width="4" stroke-linecap="round"/>
+                <line x1="70" y1="50" x2="80" y2="115" stroke="#3A231A" stroke-width="6" stroke-linecap="round"/>
+                
+                <!-- Leg Stretchers (cross bars) -->
+                <line x1="16" y1="85" x2="74" y2="85" stroke="#251610" stroke-width="4"/>
+
+                <!-- Stool Top Board -->
+                <ellipse cx="45" cy="50" rx="35" ry="12" fill="#5C3A21" stroke="#2A170C" stroke-width="2"/>
+                <ellipse cx="45" cy="46" rx="35" ry="12" fill="#8E5E38"/>
+                
+                <!-- Chai Glass holder / Coaster -->
+                <ellipse cx="45" cy="46" rx="16" ry="6" fill="#4B5563" opacity="0.8"/>
+
+                <!-- Cutting Chai Glass -->
+                <g id="chai-glass" transform="translate(32, 10)">
+                    <!-- Shadow -->
+                    <ellipse cx="13" cy="33" rx="8" ry="3" fill="#1F2937" opacity="0.3"/>
+                    <!-- Glass Body Outline (fluted retro glass) -->
+                    <polygon points="5,10 21,10 18,33 8,33" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
+                    <!-- Chai Liquid (Warm amber tea half-full) -->
+                    <polygon points="6,21 20,21 18,32 8,32" fill="#C2410C" opacity="0.9"/>
+                    <!-- Tea surface curve -->
+                    <ellipse cx="13" cy="21" rx="7" ry="2" fill="#EA580C"/>
+                    <!-- Glass reflection line -->
+                    <line x1="7" y1="12" x2="10" y2="30" stroke="#FFFFFF" stroke-width="1" opacity="0.6"/>
+                    <line x1="19" y1="12" x2="16" y2="30" stroke="#FFFFFF" stroke-width="0.8" opacity="0.4"/>
+                    <!-- Glass rim -->
+                    <ellipse cx="13" cy="10" rx="8" ry="2.5" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
+                    
+                    <!-- STEAM LINES (Rising slowly) -->
+                    <path class="steam-line steam-line-1" d="M10 -2 Q12 -12 8 -22 T12 -38" fill="none" stroke="#FDF4E3" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                    <path class="steam-line steam-line-2" d="M16 -4 Q14 -16 18 -26 T14 -42" fill="none" stroke="#FDF4E3" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                </g>
+            </g>
+
+            <!-- RED BARBER CHAIR (Detailed vector art) -->
+            <g id="barber-chair" transform="translate(290, 270)">
+                <!-- Chair Base Shadow -->
+                <ellipse cx="110" cy="245" rx="75" ry="16" fill="#1A2524" opacity="0.5"/>
+                
+                <!-- Chrome Base Plate -->
+                <ellipse cx="110" cy="235" rx="65" ry="12" fill="#9CA3AF" stroke="#4B5563" stroke-width="3"/>
+                <ellipse cx="110" cy="231" rx="65" ry="12" fill="#E5E7EB"/>
+                <!-- Base cylinder / Hydraulic Jack -->
+                <rect x="98" y="175" width="24" height="60" fill="#9CA3AF" stroke="#4B5563" stroke-width="2"/>
+                <rect x="101" y="175" width="8" height="58" fill="#F3F4F6"/>
+                <rect x="90" y="170" width="40" height="8" rx="2" fill="#4B5563"/>
+
+                <!-- Footrest Frame and Footrest Plate -->
+                <path d="M60 215 L40 215 L45 155 L95 155" fill="none" stroke="#4B5563" stroke-width="6" stroke-linecap="round"/>
+                <path d="M60 215 L40 215 L45 155 L95 155" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+                <!-- Metal footrest plate -->
+                <polygon points="25,218 55,218 50,225 20,225" fill="#374151" stroke="#4B5563" stroke-width="2"/>
+                
+                <!-- Chair Seat Cushion (Red Vinyl) -->
+                <!-- Bottom metal plate -->
+                <rect x="55" y="145" width="110" height="15" rx="3" fill="#374151" stroke="#1F2937" stroke-width="2"/>
+                <!-- Red vinyl seat cushion -->
+                <rect x="50" y="125" width="120" height="23" rx="6" fill="#991B1B" stroke="#450A0A" stroke-width="2"/>
+                <rect x="53" y="127" width="114" height="10" rx="3" fill="#DC2626"/> <!-- highlight -->
+
+                <!-- Red Vinyl Backrest -->
+                <g transform="translate(145, 30)">
+                    <!-- Support bracket -->
+                    <path d="M-20 95 L-5 95 L-5 25 L-20 25" fill="none" stroke="#4B5563" stroke-width="6"/>
+                    <path d="M-20 95 L-5 95 L-5 25 L-20 25" fill="none" stroke="#9CA3AF" stroke-width="2"/>
+                    <!-- Backrest cushion -->
+                    <rect x="-8" y="10" width="30" height="85" rx="8" fill="#991B1B" stroke="#450A0A" stroke-width="2"/>
+                    <rect x="-5" y="14" width="8" height="77" rx="3" fill="#DC2626"/> <!-- highlight -->
+                </g>
+
+                <!-- Headrest -->
+                <g transform="translate(152, -2)">
+                    <rect x="2" y="2" width="10" height="32" fill="#9CA3AF" stroke="#4B5563" stroke-width="2"/>
+                    <rect x="-8" y="-12" width="30" height="16" rx="4" fill="#991B1B" stroke="#450A0A" stroke-width="2"/>
+                    <rect x="-6" y="-10" width="26" height="5" rx="1" fill="#DC2626"/>
+                </g>
+
+                <!-- Armrests (Chrome + Red Padding) -->
+                <!-- Left Armrest (Foreground) -->
+                <g transform="translate(45, 90)">
+                    <path d="M15 35 V15 H95 V35" fill="none" stroke="#4B5563" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M15 35 V15 H95 V35" fill="none" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="25" y="10" width="60" height="9" rx="3" fill="#991B1B" stroke="#450A0A" stroke-width="1.5"/>
+                    <rect x="27" y="11" width="56" height="3" fill="#DC2626" rx="1"/>
+                </g>
+                <!-- Right Armrest (Background, slightly higher and offset) -->
+                <g transform="translate(90, 80)" opacity="0.8">
+                    <path d="M15 35 V15 H85 V35" fill="none" stroke="#374151" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M15 35 V15 H85 V35" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="25" y="10" width="50" height="9" rx="3" fill="#7F1D1D" stroke="#450A0A" stroke-width="1.5"/>
+                </g>
+            </g>
+
+            <!-- CEILING FAN (With animated blades spinning in CSS) -->
+            <g id="ceiling-fan">
+                <!-- Rod and Canopy -->
+                <rect x="397" y="0" width="6" height="50" fill="#374151"/>
+                <path d="M388 15 L412 15 L406 0 L394 0 Z" fill="#4B5563"/>
+                <!-- Fan Motor Hub -->
+                <circle cx="400" cy="55" r="16" fill="#1F2937" stroke="#4B5563" stroke-width="2"/>
+                <circle cx="400" cy="55" r="8" fill="#D97706"/> <!-- golden accent cap -->
+                
+                <!-- SPINNING BLADES GROUP -->
+                <g id="ceiling-fan-blades">
+                    <!-- Blade 1 (Points up-right) -->
+                    <g transform="rotate(0, 400, 55)">
+                        <path d="M400 48 L485 20 C490 18 493 25 487 29 L400 58 Z" fill="#111827" opacity="0.9"/>
+                        <line x1="400" y1="52" x2="480" y2="24" stroke="#4B5563" stroke-width="1.5"/>
+                    </g>
+                    <!-- Blade 2 (Points bottom-right) -->
+                    <g transform="rotate(120, 400, 55)">
+                        <path d="M400 48 L485 20 C490 18 493 25 487 29 L400 58 Z" fill="#111827" opacity="0.9"/>
+                        <line x1="400" y1="52" x2="480" y2="24" stroke="#4B5563" stroke-width="1.5"/>
+                    </g>
+                    <!-- Blade 3 (Points left) -->
+                    <g transform="rotate(240, 400, 55)">
+                        <path d="M400 48 L485 20 C490 18 493 25 487 29 L400 58 Z" fill="#111827" opacity="0.9"/>
+                        <line x1="400" y1="52" x2="480" y2="24" stroke="#4B5563" stroke-width="1.5"/>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <!-- HEADER OVERLAYS (GLASSMORPHISM) -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <h1 class="logo-text">CHILL VIBE</h1>
+            <span class="logo-subtext">85.5 FM Nostalgia</span>
+        </div>
+        
+        <div class="stats-area">
+            <div class="time-display glass-card" id="local-time">--:--:-- --</div>
+        </div>
+    </header>
+
+    <!-- FOOTER CONTROLS PANEL (RETRO RADIO STYLE) -->
+    <footer class="bottom-bar">
+        <div class="radio-controls glass-card">
+            
+            <!-- LCD Display Screen -->
+            <div class="lcd-screen">
+                <div class="lcd-row freq">STATION: 85.5 MHz "CHILL VIBE"</div>
+                <div class="lcd-row status">RADIO STATUS: <span id="radio-status-text">OFFLINE</span></div>
+                <div class="lcd-row scroll-container">
+                    <div class="lcd-row song-title" id="now-playing-title">NOW PLAYING: Click Tune In to start radio...</div>
+                </div>
+                <!-- Live Track Progress Bar -->
+                <div class="lcd-row progress-container">
+                    <span id="current-time-display">00:00</span>
+                    <div class="lcd-progress-bar-wrap">
+                        <div class="lcd-progress-bar-fill" id="progress-bar-fill"></div>
+                    </div>
+                    <span id="total-time-display">00:00</span>
+                </div>
+            </div>
+
+            <!-- Dial Control buttons / Knobs -->
+            <div class="tuner-actions">
+
+                <!-- Previous Button -->
+                <button class="retro-btn" id="prev-btn" aria-label="Previous Track" disabled>
+                    <span class="btn-icon">⏮</span>
+                    <span class="btn-label">PREV</span>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button class="retro-btn" id="play-pause-btn" aria-label="Play/Pause" disabled>
+                    <span class="btn-icon">▶</span>
+                    <span class="btn-label">TUNE IN</span>
+                </button>
+
+                <!-- Next Button -->
+                <button class="retro-btn" id="next-btn" aria-label="Next Track" disabled>
+                    <span class="btn-icon">⏭</span>
+                    <span class="btn-label">NEXT</span>
+                </button>
+
+                <!-- Mute Button -->
+                <button class="retro-btn" id="mute-btn" aria-label="Mute Toggle" disabled>
+                    <span class="btn-icon">🔊</span>
+                    <span class="btn-label">MUTE</span>
+                </button>
+
+                <!-- Volume Slider control -->
+                <div class="volume-control">
+                    <span class="vol-label">VOL</span>
+                    <input type="range" id="volume-slider" min="0" max="100" value="50" class="retro-slider" disabled>
+                </div>
+            </div>
+
+            <!-- Spotify / YouTube Music External Buttons -->
+            <div class="external-links">
+                <a href="https://open.spotify.com/playlist/37i9dQZF1DX1s9k3N3Xy1P" id="spotify-link" target="_blank" class="external-btn spotify" title="Listen on Spotify">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.744-.47-.077-.337.135-.668.47-.745 3.856-.88 7.15-.5 9.822 1.137.294.18.385.564.205.858zm1.225-2.72c-.226.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.075-1.183-.413.125-.847-.107-.972-.52-.125-.413.108-.847.52-.972 3.664-1.11 8.23-.574 11.343 1.34.366.227.485.707.258 1.074zm.105-2.833C14.383 8.8 8.19 8.6 4.607 9.688c-.55.167-1.124-.145-1.29-.696-.167-.55.145-1.124.697-1.29 4.137-1.255 10.993-1.02 15.105 1.42.496.295.66.934.366 1.43-.294.498-.933.663-1.43.368z"/>
+                    </svg>
+                    <span>Spotify</span>
+                </a>
+                <a href="https://music.youtube.com/playlist?list=PLinVjP-aRmltp5oCTTm9p8AHut05y0kgC" id="ytmusic-link" target="_blank" class="external-btn ytmusic" title="Listen on YouTube Music">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12.5c-2.48 0-4.5 2.02-4.5 4.5S9.52 16.5 12 16.5 16.5 14.48 16.5 12 14.48 7.5 12 7.5zm0 6c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                    </svg>
+                    <span>YT Music</span>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+
+
+    <!-- Application JavaScript -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
